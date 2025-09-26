@@ -20,7 +20,7 @@ import nodemailer from "nodemailer";
 app.use(express.json()); //для ответов сервера
 app.use(cookieParser());
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true })); //указываем на каком порте будет принимать запросы ,надо что бы он мечился с клинетским сервером
-app.use(passport.initialize());ddddddddddddddddddddd
+app.use(passport.initialize());
 const jwtSecret = process.env.JWT_SECRET;
 const jwtRefreshSecret = process.env.JWT_REFRESH_SECRET;
 
@@ -492,7 +492,6 @@ app.post("/api/reset-password", async (req, resp) => {
     }
   });
 });
-// app.listen(4000, () => {
-//   console.log("server open");
-// }); //указываем на каком порте будет работать сервер
-export default app;
+app.listen(4000, () => {
+  console.log("server open");
+}); //указываем на каком порте будет работать сервер
