@@ -28,14 +28,28 @@ export const useFormLoyut = ({
 
   const isPasswordValid = !errors.password && watch("password");
 
-  useEffect(() => {
-    if (serverValidationErrors) {
-      Object.entries(serverValidationErrors).forEach(([field, messages]) => {
-        form.setError(field as keyof z.infer<typeof schema>, {type:"server",message:messages.join("\n")});
+  // useEffect(() => {
+  //   if (serverValidationErrors) {
+  //     Object.entries(serverValidationErrors).forEach(([field, messages]) => {
+  //       form.setError(field as keyof z.infer<typeof schema>, {type:"server",message:messages.join("\n")});
+  //     });
+  //   }
+  // }, [serverValidationErrors]);
+useEffect(() => {
+  if (serverValidationErrors) {
+    Object.entries(serverValidationErrors).forEach(([field, messages]) => {
+      // Проверка что messages существует и это массив
+      const errorMessage = Array.isArray(messages) 
+        ? messages.join("\n") 
+        : String(messages || 'Unknown error');
+      
+      form.setError(field as keyof z.infer<typeof schema>, {
+        type: "server",
+        message: errorMessage
       });
-    }
-  }, [serverValidationErrors]);
-
+    });
+  }
+}, [serverValidationErrors, form]);
   return {
 form,showPassword,setShowPassword,isPasswordValid,showConfirmPassword,setShowConfirmPassword,isValid,isDirty,isSubmitting
   }
