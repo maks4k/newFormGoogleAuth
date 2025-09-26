@@ -20,7 +20,7 @@ export const withCheckAuth = <T,>(Component: (props: T) => ReactElement) => {
           await new Promise<void>((res) => {
             setTimeout(() => res(), 2000);
           });
-          const resp = await authApi.protected();
+         await authApi.protected();
           navigate(ROUTES.HOME);
          
         } catch (error) {
