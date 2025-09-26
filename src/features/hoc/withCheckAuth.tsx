@@ -17,7 +17,7 @@ export const withCheckAuth = <T,>(Component: (props: T) => ReactElement) => {
     useEffect(() => {
       (async () => {
         try {
-          await new Promise((res) => {
+          await new Promise<void>((res) => {
             setTimeout(() => res(), 2000);
           });
           const resp = await authApi.protected();

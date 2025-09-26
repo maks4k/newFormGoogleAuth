@@ -5,6 +5,7 @@ import { ROUTES } from "@/shared/api/constants";
 interface IUserRequest extends Pick<IUserPrivate, "email" | "password"> {}
 
 interface IUserResponse {
+  token?: string;
   user: IUserPublick;
 }
 
